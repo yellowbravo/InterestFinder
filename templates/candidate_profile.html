@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <div class="main_container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+
+                <img class="thumbnail" width="100%" src="{{ candidate.LINK_photo }}">
+
+            </div>
+            <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
+                <h1>{{ candidate.firstname }} {{ candidate.lastname }}</h1>
+                <div class="panel panel-default">
+                    <table class="table">
+                        <tr>
+                            <td>Ville</td>
+                            <td>{{ candidate.city }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Canton</td>
+                            <td>{{ candidate.district }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Parti</td>
+                            <td>{{ candidate.party_short }}</td>
+                        </tr>
+                        <tr>
+                            <td>Liste</td>
+                            <td>{{ candidate.list }}</td>
+                        </tr>
+                        <tr>
+                            <td>Naissance</td>
+                            <td>{{ candidate.year_of_birth }}</td>
+                        </tr>
+<tr>
+                            <td>Profession</td>
+                            <td>{{ candidate.occupation }}</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+
