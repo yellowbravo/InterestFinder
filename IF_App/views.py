@@ -1,10 +1,3 @@
-import os
-import datetime
-from pytz import timezone
-import json
-import pandas as pd
-import numpy as np
-
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib.auth import authenticate
@@ -15,7 +8,6 @@ from bson import json_util
 from bson.objectid import ObjectId
 from IF_App.forms import SearchCandidate
 
-from pymongo import MongoClient
 mongolab_uri = 'mongodb://nico:interestfinder2015@ds055762.mongolab.com:55762/interestfinder'
 
 from pymongo import MongoClient
@@ -25,33 +17,47 @@ client = MongoClient(mongolab_uri,
                      socketKeepAlive=True)
 db = client['interestfinder']
 
+
+def economic_sectors(request):
+    sectors = ['Agriculture, sylviculture et pêche',
+               "Industrie manufacturière, industries extractives et autres",
+               'Construction',
+               "Commerce de gros et de détail, transports, hôtels et restaurants",
+               'Information et communication',
+               'Activités financières et d’assurance',
+               'Activités immobilières',
+               "Activités spécialisées, scientifiques et techniques et activités de services administratifs et de soutien",
+               'Administration publique, défense, enseignement, santé humaine et action sociale'
+               'Autres activités de services']
+    return render(request, 'economic_sectors.html', context={'sectors': sectors})
+
 def cantons_list(request):
     cantons = ['Aargau',
-                   'Appenzell Inner Rhodes',
-                   'Appenzell Outer Rhodes',
-                   'Bern',
-                   'Basel Country',
-                   'Basel City',
-                   'Fribourg',
-                   'Geneva',
-                   'Glarus',
-                   'Graubünden',
-                   'Jura',
-                   'Lucerne',
-                   'Neuchâtel',
-                   'Nidwalden',
-                   'Obwalden',
-                   'St Gallen',
-                   'Schaffhausen',
-                   'Solothurn',
-                   'Schwyz',
-                   'Thurgau',
-                   'Ticino',
-                   'Uri',
-                   'Vaud',
-                   'Valais',
-                   'Zug',
-                   'Zurich']
+               'Appenzell Inner Rhodes',
+               'Appenzell Outer Rhodes',
+               'Bern',
+               'Basel Country',
+               'Basel City',
+               'Fribourg',
+               'Geneva',
+               'Glarus',
+               'Graubünden',
+               'Jura',
+               'Lucerne',
+               'Neuchâtel',
+               'Nidwalden',
+               'Obwalden',
+               'St Gallen',
+               'Schaffhausen',
+               'Solothurn',
+               'Schwyz',
+               'Thurgau',
+               'Ticino',
+               'Uri',
+               'Vaud',
+               'Valais',
+               'Zug',
+               'Zurich']
 
     context = {'cantons': cantons,
                }
@@ -65,25 +71,25 @@ def data_viz(request):
 
 def main(request):
     if request.POST:
-            search_form = SearchCandidate(data=request.POST)
-            if search_form.is_valid():
-                first_name = request.POST['first_name']
-                last_name = request.POST['last_name']
+        search_form = SearchCandidate(data=request.POST)
+        if search_form.is_valid():
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
 
-                collec = db['candidates']
-                cand = dict()
-                try:
-                    for c in collec.find({'lastname': last_name}):
-                        if c['firstname'] == first_name:
-                            cand = c
-                        break
+            collec = db['candidates']
+            cand = dict()
+            try:
+                for c in collec.find({'lastname': last_name}):
+                    if c['firstname'] == first_name:
+                        cand = c
+                    break
 
-                    url = '/candidate/' + str(cand['_id']) + '/'
+                url = '/candidate/' + str(cand['_id']) + '/'
 
-                    return HttpResponseRedirect(url)
+                return HttpResponseRedirect(url)
 
-                except KeyError:
-                    return HttpResponseRedirect('/')
+            except KeyError:
+                return HttpResponseRedirect('/')
     else:
         search_form = SearchCandidate()
 

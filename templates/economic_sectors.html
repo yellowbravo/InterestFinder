@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="main_container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Candidats par intérêts économiques</h1>
+                <ul class="list-group">
+                    {% for s in sectors %}
+                        <li class="list-group-item">
+                        {{ s }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

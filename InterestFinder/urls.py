@@ -20,6 +20,7 @@ from IF_App import views
 urlpatterns = [
     url(r'^$', views.main, name='index'),
     url(r'^canton/(?P<canton_name>.+)/$', views.canton, name='canton'),
+    url(r'^economic_sectors/$', views.economic_sectors),
     url(r'^candidate/(?P<candidate_id>.+)/$', views.candidate_profile, name='candidate_profile'),
     url(r'^cantons_list/$', views.cantons_list, name='cantons_list'),
     url(r'^data_viz/$', views.data_viz, name='data_viz'),
