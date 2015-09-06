@@ -134,6 +134,12 @@ def candidate_profile(request, candidate_id):
 
     data['year_of_birth'] = int(data['year_of_birth'])
 
+    try:
+        if data['corporations'] is None:
+            data['corporations'] = ['Aucun intérêt découvert']
+    except KeyError:
+        data['corporations'] = ['Aucun intérêt découvert']
+
     context = {'candidate': data
                }
     return render(request, 'candidate_profile.html', context=context)
