@@ -31,6 +31,7 @@ def economic_sectors(request):
                'Autres activités de services']
     return render(request, 'economic_sectors.html', context={'sectors': sectors})
 
+
 def cantons_list(request):
     cantons = ['Aargau',
                'Appenzell Inner Rhodes',
@@ -73,8 +74,8 @@ def main(request):
     if request.POST:
         search_form = SearchCandidate(data=request.POST)
         if search_form.is_valid():
-            first_name = request.POST['first_name']
-            last_name = request.POST['last_name']
+            first_name = request.POST['first_name'].strip()
+            last_name = request.POST['last_name'].strip()
 
             collec = db['candidates']
             cand = dict()

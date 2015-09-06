@@ -2,8 +2,10 @@ from django import forms
 
 css_class = {
     'class': 'form-control',
-    'style': 'max-width: 350px'
+    'style': 'max-width: 350px; margin-bottom: 10px',
 }
+
+
 class SearchCandidate(forms.Form):
     first_name = forms.CharField(
         max_length=30,

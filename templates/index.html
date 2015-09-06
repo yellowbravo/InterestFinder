@@ -2,29 +2,46 @@
 {% load staticfiles %}
 
 {% block content %}
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:700' rel='stylesheet' type='text/css'>
     <div class="main_container">
         <div class="row">
-            <div class="col-xs-12 col-md-4 col-lg-3">
-                <form id="user_form" method="post" action=""
-                      enctype="multipart/form-data">
+            <div style="float: none; margin: 0 auto; color: #337AB7" class="col-xs-12 col-md-4 col-lg-3">
+            <h1 style="font-family: 'Roboto Slab', serif;">InterestFinder</h1>
+                <form id="user_form" method="post" action="" enctype="multipart/form-data" style="padding-top: 20px">
 
                     {% csrf_token %}
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Rercher un candidat</h3>
+                            <h3 class="panel-title">Rechercher un candidat</h3>
                         </div>
                         <div class="panel-body">
                             {% for field in search_form %}
                                 <div>{{ field.label_tag }}</div>
                                 <div>{{ field }}</div>
                             {% endfor %}
-                        <input type="submit" class="btn btn-default" name="" value="Rechercher" />
+                            <input type="submit" class="btn btn-success" name="" value="Rechercher" />
                         </div>
 
                     </div>
                 </form>
             </div>
+
         </div>
     </div>
+
+    <footer class="footer" style="margin-top: 100px">
+      <div class="container">
+                <p class="text-muted">InterestFinder est le résultat d'un projet créé lors du "Hackathon des élections fédérales" organisé par le Temps et Opendata.ch à Lausanne, le 4 et 5 septembre 2015.
+                    L'objectif était de rechercher dans le registre du commerce les entreprises auxquelles sont liés les candidats.</p>
+
+                <p class="text-muted"><strong>Disclaimer:</strong> Les données présentées n'ont pas été vérifiées et contiennent certainement des erreurs. Merci d'avance de nous en excuser.</p>
+
+                <p class="text-muted">TODO: Après avoir rassemblé le noms des sociétés, il faudrait encore récolter leurs numéros NOGA afin de déterminer dans quel secteur économique elles sont actives.</p>
+
+                <p class="text-muted">Sources: Smartvote.ch, Zefix.admin.ch et un peu de web scrapping ;)</p>
+
+                <p class="text-muted">Retrouvez le projet sur <a href="https://github.com/yellowbravo/InterestFinder">Github!</a> </p>
+            </div>
+    </footer>
 
 {% endblock %}

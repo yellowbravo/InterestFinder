@@ -13,6 +13,9 @@
             <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9">
                 <h1>{{ candidate.firstname }} {{ candidate.lastname }}</h1>
                 <div class="panel panel-default">
+                    <div class="panel-heading">
+    <h3 class="panel-title">Profil personnel</h3>
+  </div>
                     <table class="table">
                         <tr>
                             <td>Ville</td>
@@ -40,6 +43,20 @@
                             <td>Profession</td>
                             <td>{{ candidate.occupation }}</td>
                         </tr>
+
+                    </table>
+                </div>
+                <div class="panel panel-default">
+                <div class="panel-heading">
+    <h3 class="panel-title">Intérêts économiques</h3>
+  </div>
+                    <table class="table">
+                        {% for corp in candidate.corporations %}
+                        <tr>
+                            <td>{{ corp }}</td>
+                        </tr>
+                        {% endfor %}
+
 
                     </table>
                 </div>
