@@ -74,8 +74,8 @@ def main(request):
     if request.POST:
         search_form = SearchCandidate(data=request.POST)
         if search_form.is_valid():
-            first_name = request.POST['first_name'].strip()
-            last_name = request.POST['last_name'].strip()
+            first_name = request.POST['first_name'].strip().capitalize()
+            last_name = request.POST['last_name'].strip().capitalize()
 
             collec = db['candidates']
             cand = dict()
